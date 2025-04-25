@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TakaloCash</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header, footer { background: #222; color: white; text-align: center; padding: 1em; }
+    .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
+    h1, h2 { text-align: center; }
+    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+    .form-section { display: none; margin-top: 20px; }
+    label, input, select { display: block; width: 100%; margin-bottom: 10px; }
+    .footer-links a { color: white; margin: 0 10px; text-decoration: none; cursor: pointer; }
+    #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+    #modal-content { background: white; padding: 20px; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 10px; position: relative; }
+    #modal-content h3 { margin-top: 0; }
+    .close-btn { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TakaloCash</h1>
+    <p><strong>Échangez vos cryptos en argent réel, facilement et rapidement!</strong></p>
+    <p>Simple. Rapide. Sécurisé.</p>
+  </header>  <div class="container">
+    <h2>Choisissez une opération :</h2>
+    <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
+    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
+  <h3>Formulaire de Retrait</h3>
+  <label>Cryptomonnaie</label>
+  <select>
+    <option>BTC</option>
+    <option>ETH</option>
+    <option>USDT</option>
+    <option>BNB</option>
+  </select>
+  <label>Adresse de réception crypto</label>
+  <input type="text">
+  <label>Montant en crypto</label>
+  <input type="number">
+  <label>Service de réception</label>
+  <select>
+    <option>Mvola</option>
+    <option>Orange Money</option>
+    <option>Airtel Money</option>
+  </select>
+  <label>Numéro de téléphone</label>
+  <input type="text">
+  <label>Conversion automatique :</label>
+  <p>0.001 BTC = 200 000 Ariary (exemple)</p>
+  <button>Envoyer</button>
+</div>
+
+<div id="depot" class="form-section">
+  <h3>Formulaire de Dépôt</h3>
+  <label>Service d'envoi</label>
+  <select>
+    <option>Mvola</option>
+    <option>Orange Money</option>
+    <option>Airtel Money</option>
+  </select>
+  <label>Montant en Ariary</label>
+  <input type="number">
+  <label>Numéro de téléphone utilisé</label>
+  <input type="text">
+  <label>Conversion automatique :</label>
+  <p>100 000 Ariary = 0.005 USDT (exemple)</p>
+  <label>Adresse crypto pour l’envoi :</label>
+  <p>USDT TRC20 : TX9z...xxx</p>
+  <button>Envoyer</button>
+</div>
+
+  </div>  <footer>
+    <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
+    <div class="footer-links">
+      <a onclick="showModal('privacy')">Politique de confidentialité</a> |
+      <a onclick="showModal('terms')">Conditions générales d'utilisation</a>
+    </div>
+    <p>Adresse : Antananarivo, Madagascar</p>
+  </footer>  <div id="modal">
+    <div id="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>  <script>
+    function showForm(type) {
+      document.getElementById('retrait').style.display = 'none';
+      document.getElementById('depot').style.display = 'none';
+      document.getElementById(type).style.display = 'block';
+    }
+
+    function showModal(type) {
+      document.getElementById('modal').style.display = 'block';
+      let content = document.getElementById('modal-body');
+      if (type === 'privacy') {
+        content.innerHTML = `
+          <h3>Politique de confidentialité</h3>
+          <p>Chez TakaloCash, la confidentialité de vos données est notre priorité.</p>
+          <p><strong>1. Données collectées :</strong> Nous collectons uniquement les informations nécessaires : nom, email, téléphone, type de crypto, montants.</p>
+          <p><strong>2. Utilisation :</strong> Pour traiter les opérations, contact client, amélioration du service.</p>
+          <p><strong>3. Partage :</strong> Aucune donnée ne sera partagée sauf obligation légale.</p>
+          <p><strong>4. Sécurité :</strong> Protection technique des données.</p>
+          <p><strong>5. Vos droits :</strong> Vous pouvez demander modification ou suppression par email ou WhatsApp.</p>
+        `;
+      } else if (type === 'terms') {
+        content.innerHTML = `
+          <h3>Conditions générales d'utilisation</h3>
+          <p><strong>1. Service :</strong> Plateforme d'échange crypto ↔ Ariary via services mobiles.</p>
+          <p><strong>2. Âge requis :</strong> 18 ans minimum.</p>
+          <p><strong>3. Délais :</strong> Transactions sous 5 à 60 minutes.</p>
+          <p><strong>4. Taux :</strong> Variables et affichés au moment de la validation.</p>
+          <p><strong>5. Responsabilité :</strong> Non responsable des erreurs de saisie ou problèmes de réseau.</p>
+          <p><strong>6. Suspension :</strong> Droit de bloquer tout usage frauduleux.</p>
+          <p><strong>7. Modification :</strong> Ces conditions peuvent être modifiées à tout moment.</p>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script></body>
+</html>
+
