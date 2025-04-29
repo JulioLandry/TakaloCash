@@ -1,9 +1,24 @@
-<!DOCTYPE html><html lang="fr">
+v<!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TakaloCash</title>
   <style>
+    nav {
+  background-color: #00b894; /* Mifanaraka amin'ny loko ankapobeny */
+  padding: 10px 20px;
+  text-align: center;
+}
+.menu a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+.menu a:hover {
+  text-decoration: underline;
+}
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
     header, footer { background: #222; color: white; text-align: center; padding: 1em; }
     .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
@@ -19,13 +34,7 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>TakaloCash</h1>
-    <p><strong>Échangez vos cryptos en argent réel, facilement et rapidement!</strong></p>
-    <p>Simple. Rapide. Sécurisé.</p>
-  </header>  <div class="container">
-
-    <nav>
+  <nav>
     <div class="menu">
       <a href="index.html">Fandraisana</a>
       <a href="services.html">Serivisy</a>
@@ -33,7 +42,13 @@
       <a href="faq.html">Fanontaniana</a>
     </div>
   </nav>
-    
+
+  <header>
+    <h1>TakaloCash</h1>
+    <p><strong>Échangez vos cryptos en argent réel, facilement et rapidement!</strong></p>
+    <p>Simple. Rapide. Sécurisé.</p>
+  </header>
+  <header>  <div class="container">
     <h2>Choisissez une opération :</h2>
     <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
     <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
