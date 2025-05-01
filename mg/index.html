@@ -5,84 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TakaloCash - Fandraisana</title>
   <style>
-    body { font-family: Arial, sans-serif;
+    body {
+  font-family: Arial, sans-serif;
   background: url('Ariary.jpg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
-  padding: 0px;
-    }
-    header, footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 1em;
-    }
-    .container {
-      padding: 0px;
-      max-width: 800px;
-      margin: auto;
-      background: white;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    button {
-      margin: 0px;
-      padding: 0px 0px;
-      cursor: pointer;
-    }
-    .form-section {
-      display: none;
-      margin-top: 0px;
-    }
-    label, input, select {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .footer-links a {
-      color: white;
-      margin: 0 0px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-    }
-    #modal-content {
-      background: white;
-      padding: 20px;
-      margin: 5% auto;
-      width: 90%;
-      max-width: 700px;
-      border-radius: 10px;
-      position: relative;
-    }
-    #modal-content h3 {
-      margin-top: 0;
-    }
-    .close-btn {
+  padding: 20px;
+    }: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header, footer { background: #222; color: white; text-align: center; padding: 1em; }
+    .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
+    h1, h2 { text-align: center; }
+    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+    .form-section { display: none; margin-top: 20px; }
+    label, input, select { display: block; width: 100%; margin-bottom: 10px; }
+    .footer-links a { color: white; margin: 0 10px; text-decoration: none; cursor: pointer; }
+    #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+    #modal-content { background: white; padding: 20px; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 10px; position: relative; }
+    #modal-content h3 { margin-top: 0; }
+    .close-btn { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 18px; }
+    .language-switch {
       position: absolute;
       top: 10px;
-      right: 20px;
-      cursor: pointer;
-      font-size: 18px;
+      right: 10px;
     }
-    .icon-select {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .icon-select img {
-      width: 40px;
-      height: 40px;
+    .language-switch img {
+      margin-left: 10px;
       cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .menu a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
     }
   </style>
 </head>
@@ -105,73 +64,62 @@
   </header>
 
   <nav>
-      <div class="menu">
-        <a href="index.html">Fandraisana</a>
-        <a href="Service.html">Serivisy</a>
-        <a href="contact.html">Fifandraisana</a>
-        <a href="Faq.html">Fanontaniana</a>
-      </div>
-    </nav>
-  </header>  <div class="container">
-    <h2>Choisissez une opération :</h2>
-    <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
-    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
-  <h3>Formulaire de Retrait</h3>
-  <form action="mailto:takalocash@gmail.com" method="POST" enctype="text/plain">
-    <label>Cryptomonnaie</label>
-    <div class="icon-select">
-      <img src="btc.png" alt="BTC">
-      <img src="eth.png" alt="ETH">
-      <img src="usdt.png" alt="USDT">
-      <img src="bnb.png" alt="BNB">
+    <div class="menu">
+      <a href="index.html">Fandraisana</a>
+      <a href="services.html">Serivisy</a>
+      <a href="contact.html">Fifandraisana</a>
+      <a href="faq.html">Fanontaniana</a>
     </div>
-    <label>Adresse crypto envoyée</label>
-    <input type="text" name="adresse_crypto">
-    <label>Montant (crypto)</label>
-    <input type="number" name="montant_crypto">
-    <label>Service Mobile Money (réception)</label>
-    <div class="icon-select">
-      <img src="MVOLA.png" alt="Mvola">
-      <img src="orange.png" alt="Orange Money">
-      <img src="airtel.png" alt="Airtel Money">
-    </div>
-    <label>Numéro de téléphone</label>
-    <input type="text" name="numero_telephone">
-    <label>Nom inscrit sur le numéro</label>
-    <input type="text" name="nom_utilisateur">
-    <label>Montant en Ariary (calcul automatique)</label>
-    <input type="text" readonly value="Calculé selon taux du jour">
-    <button type="submit">Envoyer</button>
-  </form>
-</div>
+  </nav>
 
-<div id="depot" class="form-section">
-  <h3>Formulaire de Dépôt</h3>
-  <form action="mailto:takalocash@gmail.com" method="POST" enctype="text/plain">
-    <label>Service Mobile Money</label>
-    <div class="icon-select">
-      <img src="MVOLA.png" alt="Mvola">
-      <img src="orange.png" alt="Orange Money">
-      <img src="airtel.png" alt="Airtel Money">
+  <div class="container">
+    <h2>Safidio ny karazana fifanakalozana:</h2>
+    <button onclick="showForm('retrait')">Faka vola (Crypto → Ariary)</button>
+    <button onclick="showForm('depot')">Fametrahana vola (Ariary → Crypto)</button>
+
+    <div id="retrait" class="form-section">
+      <h3>Faka vola</h3>
+      <label>Crypto</label>
+      <select>
+        <option>BTC</option>
+        <option>ETH</option>
+        <option>USDT</option>
+        <option>BNB</option>
+      </select>
+      <label>Adiresy handraisana</label>
+      <input type="text">
+      <label>Vola crypto</label>
+      <input type="number">
+      <label>Mobile Money handraisana</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Laharana finday</label>
+      <input type="text">
+      <p>0.001 BTC = 200 000 Ariary (ohatra)</p>
+      <button>Alefa</button>
     </div>
-    <label>Numéro téléphone utilisé</label>
-    <input type="text" name="numero_telephone">
-    <label>Montant en Ariary</label>
-    <input type="number" name="montant_ariary">
-    <label>Crypto choisi</label>
-    <div class="icon-select">
-      <img src="btc.png" alt="BTC">
-      <img src="eth.png" alt="ETH">
-      <img src="usdt.png" alt="USDT">
-      <img src="bnb.png" alt="BNB">
+
+    <div id="depot" class="form-section">
+      <h3>Fametrahana vola</h3>
+      <label>Mobile Money handefasana</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Vola Ariary</label>
+      <input type="number">
+      <label>Laharana finday</label>
+      <input type="text">
+      <p>100 000 Ariary = 0.005 USDT (ohatra)</p>
+      <label>Adiresy crypto handefasana</label>
+      <p>USDT TRC20: TX9z...xxx</p>
+      <button>Alefa</button>
     </div>
-    <label>Adresse crypto de réception</label>
-    <input type="text" name="adresse_crypto">
-    <label>Montant crypto reçu (calcul automatique)</label>
-    <input type="text" readonly value="Calculé selon taux du jour">
-    <button type="submit">Envoyer</button>
-  </form>
-</div>
+  </div>
 
   <footer>
     <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
