@@ -1,206 +1,137 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="mg">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TakaloCash</title>
+  <title>TakaloCash - Fandraisana</title>
   <style>
-    nav {
-      background-color: #00b894;
-      padding: 10px 20px;
-      text-align: center;
-    }
-    .menu a {
-      color: yellow;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-    }
-    .menu a:hover {
-      text-decoration: underline;
-    }
-    body {
-  font-family: Arial, sans-serif;
-  background: url('Ariary.jpg') no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 20px;
-    }
-  <div style="text-align: right; padding: 10px;">
-  <a href="../mg/index.html" title="Malagasy">
-   <img src="https://flagcdn.com/w40/mg.png" alt="Malagasy" width="30">
-  </a>
-  <a href="../fr/index.html" title="Français">
-    <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="30">
-  </a>
-</div>
-    header, footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 1em;
-    }
-    .container {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background: white;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    button {
-      margin: 10px;
-      padding: 10px 20px;
-      cursor: pointer;
-    }
-    .form-section {
-      display: none;
-      margin-top: 20px;
-    }
-    label, input, select {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .footer-links a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-    }
-    #modal-content {
-      background: white;
-      padding: 20px;
-      margin: 5% auto;
-      width: 90%;
-      max-width: 700px;
-      border-radius: 10px;
-      position: relative;
-    }
-    #modal-content h3 {
-      margin-top: 0;
-    }
-    .close-btn {
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header, footer { background: #222; color: white; text-align: center; padding: 1em; }
+    .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
+    h1, h2 { text-align: center; }
+    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+    .form-section { display: none; margin-top: 20px; }
+    label, input, select { display: block; width: 100%; margin-bottom: 10px; }
+    .footer-links a { color: white; margin: 0 10px; text-decoration: none; cursor: pointer; }
+    #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+    #modal-content { background: white; padding: 20px; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 10px; position: relative; }
+    #modal-content h3 { margin-top: 0; }
+    .close-btn { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 18px; }
+    .language-switch {
       position: absolute;
       top: 10px;
-      right: 20px;
-      cursor: pointer;
-      font-size: 18px;
+      right: 10px;
     }
-    .icon-select {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .icon-select img {
-      width: 40px;
-      height: 40px;
+    .language-switch img {
+      margin-left: 10px;
       cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .menu a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <h1>TakaloCash</h1>
-  <p><strong>Échangez vos cryptos en argent réel, facilement et rapidement!</strong></p>
-  <p>Simple. Rapide. Sécurisé.</p>  <header>
-    <nav>
-      <div class="menu">
-        <a href="index.html">Fandraisana</a>
-        <a href="Service.html">Serivisy</a>
-        <a href="contact.html">Fifandraisana</a>
-        <a href="Faq.html">Fanontaniana</a>
-      </div>
-    </nav>
-  </header>  <div class="container">
-    <h2>Choisissez une opération :</h2>
-    <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
-    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
-  <h3>Formulaire de Retrait</h3>
-  <form action="mailto:takalocash@gmail.com" method="POST" enctype="text/plain">
-    <label>Cryptomonnaie</label>
-    <div class="icon-select">
-      <img src="btc.png" alt="BTC">
-      <img src="eth.png" alt="ETH">
-      <img src="usdt.png" alt="USDT">
-      <img src="bnb.png" alt="BNB">
-    </div>
-    <label>Adresse crypto envoyée</label>
-    <input type="text" name="adresse_crypto">
-    <label>Montant (crypto)</label>
-    <input type="number" name="montant_crypto">
-    <label>Service Mobile Money (réception)</label>
-    <div class="icon-select">
-      <img src="MVOLA.png" alt="Mvola">
-      <img src="orange.png" alt="Orange Money">
-      <img src="airtel.png" alt="Airtel Money">
-    </div>
-    <label>Numéro de téléphone</label>
-    <input type="text" name="numero_telephone">
-    <label>Nom inscrit sur le numéro</label>
-    <input type="text" name="nom_utilisateur">
-    <label>Montant en Ariary (calcul automatique)</label>
-    <input type="text" readonly value="Calculé selon taux du jour">
-    <button type="submit">Envoyer</button>
-  </form>
-</div>
 
-<div id="depot" class="form-section">
-  <h3>Formulaire de Dépôt</h3>
-  <form action="mailto:takalocash@gmail.com" method="POST" enctype="text/plain">
-    <label>Service Mobile Money</label>
-    <div class="icon-select">
-      <img src="MVOLA.png" alt="Mvola">
-      <img src="orange.png" alt="Orange Money">
-      <img src="airtel.png" alt="Airtel Money">
-    </div>
-    <label>Numéro téléphone utilisé</label>
-    <input type="text" name="numero_telephone">
-    <label>Montant en Ariary</label>
-    <input type="number" name="montant_ariary">
-    <label>Crypto choisi</label>
-    <div class="icon-select">
-      <img src="btc.png" alt="BTC">
-      <img src="eth.png" alt="ETH">
-      <img src="usdt.png" alt="USDT">
-      <img src="bnb.png" alt="BNB">
-    </div>
-    <label>Adresse crypto de réception</label>
-    <input type="text" name="adresse_crypto">
-    <label>Montant crypto reçu (calcul automatique)</label>
-    <input type="text" readonly value="Calculé selon taux du jour">
-    <button type="submit">Envoyer</button>
-  </form>
-</div>
+  <!-- Language Switch -->
+  <div class="language-switch">
+    <a href="../mg/index.html" title="Malagasy">
+      <img src="https://flagcdn.com/w40/mg.png" alt="Malagasy" width="30">
+    </a>
+    <a href="../fr/index.html" title="Français">
+      <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="30">
+    </a>
+  </div>
 
-  </div>  <footer>
+  <header>
+    <h1>TakaloCash</h1>
+    <p><strong>Avadiho ho vola tena ireo cryptos-nao!</strong></p>
+    <p>Tsotra. Haingana. Azo antoka.</p>
+  </header>
+
+  <nav>
+    <div class="menu">
+      <a href="index.html">Fandraisana</a>
+      <a href="services.html">Serivisy</a>
+      <a href="contact.html">Fifandraisana</a>
+      <a href="faq.html">Fanontaniana</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Safidio ny karazana fifanakalozana:</h2>
+    <button onclick="showForm('retrait')">Faka vola (Crypto → Ariary)</button>
+    <button onclick="showForm('depot')">Fametrahana vola (Ariary → Crypto)</button>
+
+    <div id="retrait" class="form-section">
+      <h3>Faka vola</h3>
+      <label>Crypto</label>
+      <select>
+        <option>BTC</option>
+        <option>ETH</option>
+        <option>USDT</option>
+        <option>BNB</option>
+      </select>
+      <label>Adiresy handraisana</label>
+      <input type="text">
+      <label>Vola crypto</label>
+      <input type="number">
+      <label>Mobile Money handraisana</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Laharana finday</label>
+      <input type="text">
+      <p>0.001 BTC = 200 000 Ariary (ohatra)</p>
+      <button>Alefa</button>
+    </div>
+
+    <div id="depot" class="form-section">
+      <h3>Fametrahana vola</h3>
+      <label>Mobile Money handefasana</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Vola Ariary</label>
+      <input type="number">
+      <label>Laharana finday</label>
+      <input type="text">
+      <p>100 000 Ariary = 0.005 USDT (ohatra)</p>
+      <label>Adiresy crypto handefasana</label>
+      <p>USDT TRC20: TX9z...xxx</p>
+      <button>Alefa</button>
+    </div>
+  </div>
+
+  <footer>
     <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
     <div class="footer-links">
-      <a onclick="showModal('privacy')">Politique de confidentialité</a> |
-      <a onclick="showModal('terms')">Conditions générales d'utilisation</a>
+      <a onclick="showModal('privacy')">Politika manokana</a> |
+      <a onclick="showModal('terms')">Fepetra ampiasàna</a>
     </div>
-    <div class=menu>
-        <a href="index.html">Fandraisana</a>
-        <a href="Service.html">Serivisy</a>
-        <a href="contact.html">Fifandraisana</a>
-        <a href="Faq.html">Fanontaniana</a>
-      </div>
-    <p>Adresse : Antananarivo, Madagascar - TakaloCash © 2025</p>
-  </footer>  <div id="modal">
+    <p>Adiresy : Antananarivo, Madagascar</p>
+  </footer>
+
+  <div id="modal">
     <div id="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
       <div id="modal-body"></div>
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
     function showForm(type) {
       document.getElementById('retrait').style.display = 'none';
       document.getElementById('depot').style.display = 'none';
@@ -212,24 +143,13 @@
       let content = document.getElementById('modal-body');
       if (type === 'privacy') {
         content.innerHTML = `
-          <h3>Politique de confidentialité</h3>
-          <p>Chez TakaloCash, la confidentialité de vos données est notre priorité.</p>
-          <p><strong>1. Données collectées :</strong> Nous collectons uniquement les informations nécessaires : nom, email, téléphone, type de crypto, montants.</p>
-          <p><strong>2. Utilisation :</strong> Pour traiter les opérations, contact client, amélioration du service.</p>
-          <p><strong>3. Partage :</strong> Aucune donnée ne sera partagée sauf obligation légale.</p>
-          <p><strong>4. Sécurité :</strong> Protection technique des données.</p>
-          <p><strong>5. Vos droits :</strong> Vous pouvez demander modification ou suppression par email ou WhatsApp.</p>
+          <h3>Politika manokana</h3>
+          <p>Miaro ny mombamomba anao izahay. Tsy zaraina amin'ny olona ivelany raha tsy amin'ny antony ara-dalàna.</p>
         `;
       } else if (type === 'terms') {
         content.innerHTML = `
-          <h3>Conditions générales d'utilisation</h3>
-          <p><strong>1. Service :</strong> Plateforme d'échange crypto ↔ Ariary via services mobiles.</p>
-          <p><strong>2. Âge requis :</strong> 18 ans minimum.</p>
-          <p><strong>3. Délais :</strong> Transactions sous 5 à 60 minutes.</p>
-          <p><strong>4. Taux :</strong> Variables et affichés au moment de la validation.</p>
-          <p><strong>5. Responsabilité :</strong> Non responsable des erreurs de saisie ou problèmes de réseau.</p>
-          <p><strong>6. Suspension :</strong> Droit de bloquer tout usage frauduleux.</p>
-          <p><strong>7. Modification :</strong> Ces conditions peuvent être modifiées à tout moment.</p>
+          <h3>Fepetra ampiasàna</h3>
+          <p>Amin'ny fampiasàna ity site ity dia manaiky ny fitsipikao rehetra ianao.</p>
         `;
       }
     }
@@ -237,5 +157,7 @@
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
