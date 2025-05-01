@@ -5,37 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TakaloCash - Fandraisana</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:url('Ariary.jpg') }
-    header, footer { background: #222; color: white; text-align: center; padding: 1em; }
-    .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
-    h1, h2 { text-align: center; }
-    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
-    .form-section { display: none; margin-top: 20px; }
-    label, input, select { display: block; width: 100%; margin-bottom: 10px; }
-    .footer-links a { color: white; margin: 0 10px; text-decoration: none; cursor: pointer; }
-    #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
-    #modal-content { background: white; padding: 20px; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 10px; position: relative; }
-    #modal-content h3 { margin-top: 0; }
-    .close-btn { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 18px; }
-    .language-switch {
+    body { font-family: Arial, sans-serif;
+  background: url('Ariary.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 20px;
+    }
+    header, footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .form-section {
+      display: none;
+      margin-top: 20px;
+    }
+    label, input, select {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+    }
+    #modal-content {
+      background: white;
+      padding: 20px;
+      margin: 5% auto;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 10px;
+      position: relative;
+    }
+    #modal-content h3 {
+      margin-top: 0;
+    }
+    .close-btn {
       position: absolute;
       top: 10px;
-      right: 10px;
-    }
-    .language-switch img {
-      margin-left: 10px;
+      right: 20px;
       cursor: pointer;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      font-size: 18px;
     }
-    nav {
-      text-align: center;
-      margin-top: 10px;
+    .icon-select {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .menu a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #333;
+    .icon-select img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
     }
   </style>
 </head>
