@@ -1,18 +1,163 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TakaloCash - Accueil</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header, footer { background: #222; color: white; text-align: center; padding: 1em; }
+    .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
+    h1, h2 { text-align: center; }
+    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+    .form-section { display: none; margin-top: 20px; }
+    label, input, select { display: block; width: 100%; margin-bottom: 10px; }
+    .footer-links a { color: white; margin: 0 10px; text-decoration: none; cursor: pointer; }
+    #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+    #modal-content { background: white; padding: 20px; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 10px; position: relative; }
+    #modal-content h3 { margin-top: 0; }
+    .close-btn { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 18px; }
+    .language-switch {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .language-switch img {
+      margin-left: 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .menu a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h1>TakaloCash</h1>
-  <p>Bienvenue ! Échangez vos cryptos contre de l’Ariary en toute simplicité.</p>
+
+  <!-- Changement de langue -->
+  <div class="language-switch">
+    <a href="../mg/index.html" title="Malagasy">
+      <img src="https://flagcdn.com/w40/mg.png" alt="Malagasy" width="30">
+    </a>
+    <a href="../fr/index.html" title="Français">
+      <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="30">
+    </a>
+  </div>
+
+  <header>
+    <h1>TakaloCash</h1>
+    <p><strong>Échangez vos cryptos en argent réel !</strong></p>
+    <p>Simple. Rapide. Sécurisé.</p>
+  </header>
+
   <nav>
-    <a href="index.html">Accueil</a> |
-    <a href="services.html">Services</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="faq.html">FAQ</a> |
-    <a href="../mg/index.html">Malagasy</a>
+    <div class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </div>
   </nav>
+
+  <div class="container">
+    <h2>Choisissez une opération :</h2>
+    <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
+    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button>
+
+    <div id="retrait" class="form-section">
+      <h3>Formulaire de Retrait</h3>
+      <label>Cryptomonnaie</label>
+      <select>
+        <option>BTC</option>
+        <option>ETH</option>
+        <option>USDT</option>
+        <option>BNB</option>
+      </select>
+      <label>Adresse crypto</label>
+      <input type="text">
+      <label>Montant crypto</label>
+      <input type="number">
+      <label>Service Mobile Money</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Numéro de téléphone</label>
+      <input type="text">
+      <p>0.001 BTC = 200 000 Ariary (exemple)</p>
+      <button>Envoyer</button>
+    </div>
+
+    <div id="depot" class="form-section">
+      <h3>Formulaire de Dépôt</h3>
+      <label>Service Mobile Money</label>
+      <select>
+        <option>Mvola</option>
+        <option>Orange Money</option>
+        <option>Airtel Money</option>
+      </select>
+      <label>Montant en Ariary</label>
+      <input type="number">
+      <label>Numéro de téléphone</label>
+      <input type="text">
+      <p>100 000 Ariary = 0.005 USDT (exemple)</p>
+      <label>Adresse crypto pour envoi :</label>
+      <p>USDT TRC20: TX9z...xxx</p>
+      <button>Envoyer</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Contact : takalocash@gmail.com | WhatsApp : +261 34 74 510 51</p>
+    <div class="footer-links">
+      <a onclick="showModal('privacy')">Politique de confidentialité</a> |
+      <a onclick="showModal('terms')">Conditions d'utilisation</a>
+    </div>
+    <p>Adresse : Antananarivo, Madagascar</p>
+  </footer>
+
+  <div id="modal">
+    <div id="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(type) {
+      document.getElementById('retrait').style.display = 'none';
+      document.getElementById('depot').style.display = 'none';
+      document.getElementById(type).style.display = 'block';
+    }
+
+    function showModal(type) {
+      document.getElementById('modal').style.display = 'block';
+      let content = document.getElementById('modal-body');
+      if (type === 'privacy') {
+        content.innerHTML = `
+          <h3>Politique de confidentialité</h3>
+          <p>Nous protégeons vos données personnelles. Aucune information ne sera partagée sans raison légale.</p>
+        `;
+      } else if (type === 'terms') {
+        content.innerHTML = `
+          <h3>Conditions d'utilisation</h3>
+          <p>En utilisant ce site, vous acceptez toutes nos conditions.</p>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+
 </body>
 </html>
