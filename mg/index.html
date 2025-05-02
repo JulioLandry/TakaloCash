@@ -1,4 +1,4 @@
-t<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,48 +128,31 @@ t<!DOCTYPE html><html lang="fr">
     <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
     <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
-<style>
-  .icon-select img {
-    width: 50px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-
-  .icon-select img.selected {
-    border: 2px solid #44bd32;
-    box-shadow: 0 0 10px #44bd32;
-  }
-</style>
-
 <div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
 
-    <label>Cryptomonnaie</label>
-    <div class="icon-select" id="retrait-crypto-select">
-      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto(this, 'BTC', 100000)">
-      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto(this, 'ETH', 5000)">
-      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto(this, 'USDT', 4500)">
-      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto(this, 'BNB', 3000)">
+    <label>Cryptomonnaie envoyée</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000)">
     </div>
-    <input type="hidden" name="cryptomonnaie" id="retrait-crypto">
+    <input type="hidden" name="crypto_envoyee" id="retrait-crypto-choice">
 
     <label>Adresse crypto envoyée</label>
     <input type="text" name="adresse_crypto" required>
 
-    <label>Montant (crypto)</label>
-    <input type="number" name="montant_crypto" id="montant-retrait" oninput="calculateAriaryRetrait()" required>
+    <label>Montant envoyé (crypto)</label>
+    <input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
 
     <label>Service Mobile Money (réception)</label>
-    <div class="icon-select" id="retrait-mobile-money-select">
-      <img src="MVOLA.png" alt="Mvola" onclick="selectRetraitMoney(this, 'Mvola')">
-      <img src="orange.png" alt="Orange Money" onclick="selectRetraitMoney(this, 'Orange Money')">
-      <img src="airtel.png" alt="Airtel Money" onclick="selectRetraitMoney(this, 'Airtel Money')">
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
     </div>
-    <input type="hidden" name="service_mobile_money" id="retrait-mobile-money">
 
     <label>Numéro de téléphone</label>
     <input type="text" name="numero_telephone" required>
@@ -178,7 +161,7 @@ t<!DOCTYPE html><html lang="fr">
     <input type="text" name="nom_utilisateur" required>
 
     <label>Montant en Ariary (calcul automatique)</label>
-    <input type="text" name="montant_ariary" id="retrait-result" readonly placeholder="Calculé automatiquement">
+    <input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
 
     <p id="retrait-rate-info" style="color:#e67e22; font-weight:bold;"></p>
 
@@ -189,60 +172,35 @@ t<!DOCTYPE html><html lang="fr">
 <script>
   let retraitRate = 0;
 
-  function selectRetraitCrypto(imgElement, crypto, rate) {
-    document.querySelectorAll('#retrait-crypto-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
-    document.getElementById("retrait-crypto").value = crypto;
+  function selectRetraitCrypto(crypto, rate) {
+    document.getElementById("retrait-crypto-choice").value = crypto;
     retraitRate = rate;
     document.getElementById("retrait-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
     calculateAriaryRetrait();
   }
 
-  function selectRetraitMoney(imgElement, provider) {
-    document.querySelectorAll('#retrait-mobile-money-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
-    document.getElementById("retrait-mobile-money").value = provider;
-  }
-
   function calculateAriaryRetrait() {
-    const montantCrypto = parseFloat(document.getElementById("montant-retrait").value);
-    const ariaryField = document.getElementById("retrait-result");
+    const amountCrypto = parseFloat(document.getElementById("crypto-retrait").value);
+    const ariaryField = document.getElementById("ariary-retrait-result");
 
-    if (!isNaN(montantCrypto) && retraitRate > 0) {
-      ariaryField.value = (montantCrypto * retraitRate).toLocaleString() + " Ar";
+    if (!isNaN(amountCrypto) && retraitRate > 0) {
+      ariaryField.value = (amountCrypto * retraitRate).toLocaleString();
     } else {
       ariaryField.value = "";
     }
   }
 </script>
 
-<style>
-  .icon-select img {
-    width: 50px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-
-  .icon-select img.selected {
-    border: 2px solid #44bd32;
-    box-shadow: 0 0 10px #44bd32;
-  }
-</style>
-
-<div id="depot" class="form-section">
+<<div id="depot" class="form-section">
   <h3>Formulaire de Dépôt</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
-
+    
     <label>Service Mobile Money</label>
-    <div class="icon-select" id="mobile-money-select">
-      <img src="MVOLA.png" alt="Mvola" onclick="selectMobileMoney(this, 'Mvola')">
-      <img src="orange.png" alt="Orange Money" onclick="selectMobileMoney(this, 'Orange Money')">
-      <img src="airtel.png" alt="Airtel Money" onclick="selectMobileMoney(this, 'Airtel Money')">
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
     </div>
-    <input type="hidden" name="service_mobile_money" id="selected-mobile-money">
 
     <label>Numéro téléphone utilisé</label>
     <input type="text" name="numero_telephone" required>
@@ -251,11 +209,11 @@ t<!DOCTYPE html><html lang="fr">
     <input type="number" name="montant_ariary" id="ariary-depot" required oninput="calculateCryptoDepot()">
 
     <label>Crypto choisi</label>
-    <div class="icon-select" id="crypto-select">
-      <img src="btc.png" alt="BTC" onclick="selectDepotCrypto(this, 'BTC', 100000)">
-      <img src="eth.png" alt="ETH" onclick="selectDepotCrypto(this, 'ETH', 5000)">
-      <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto(this, 'USDT', 4500)">
-      <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto(this, 'BNB', 3000)">
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectDepotCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectDepotCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto('BNB', 3000)">
     </div>
     <input type="hidden" name="crypto_choisi" id="depot-crypto-choice">
 
@@ -274,9 +232,7 @@ t<!DOCTYPE html><html lang="fr">
 <script>
   let depotRate = 0;
 
-  function selectDepotCrypto(imgElement, crypto, rate) {
-    document.querySelectorAll('#crypto-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
+  function selectDepotCrypto(crypto, rate) {
     document.getElementById("depot-crypto-choice").value = crypto;
     depotRate = rate;
     document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
@@ -292,12 +248,6 @@ t<!DOCTYPE html><html lang="fr">
     } else {
       cryptoField.value = "";
     }
-  }
-
-  function selectMobileMoney(imgElement, provider) {
-    document.querySelectorAll('#mobile-money-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
-    document.getElementById("selected-mobile-money").value = provider;
   }
 </script>
   </div>  <footer>
