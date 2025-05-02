@@ -134,28 +134,27 @@
   <h3>Formulaire de Retrait</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
 
-    <label>Cryptomonnaie</label>
-    <div class="icon-select" id="retrait-crypto-select">
-      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto(this, 'BTC', 100000)">
-      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto(this, 'ETH', 5000)">
-      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto(this, 'USDT', 4500)">
-      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto(this, 'BNB', 3000)">
+    <label>Cryptomonnaie envoyée</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000)">
     </div>
-    <input type="hidden" name="cryptomonnaie" id="retrait-crypto">
+    <input type="hidden" name="crypto_envoyee" id="retrait-crypto-choice">
 
     <label>Adresse crypto envoyée</label>
     <input type="text" name="adresse_crypto" required>
 
-    <label>Montant (crypto)</label>
-    <input type="number" name="montant_crypto" id="montant-retrait" oninput="calculateAriaryRetrait()" required>
+    <label>Montant envoyé (crypto)</label>
+    <input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
 
     <label>Service Mobile Money (réception)</label>
-    <div class="icon-select" id="retrait-mobile-money-select">
-      <img src="MVOLA.png" alt="Mvola" onclick="selectRetraitMoney(this, 'Mvola')">
-      <img src="orange.png" alt="Orange Money" onclick="selectRetraitMoney(this, 'Orange Money')">
-      <img src="airtel.png" alt="Airtel Money" onclick="selectRetraitMoney(this, 'Airtel Money')">
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
     </div>
-    <input type="hidden" name="service_mobile_money" id="retrait-mobile-money">
 
     <label>Numéro de téléphone</label>
     <input type="text" name="numero_telephone" required>
@@ -164,7 +163,7 @@
     <input type="text" name="nom_utilisateur" required>
 
     <label>Montant en Ariary (calcul automatique)</label>
-    <input type="text" name="montant_ariary" id="retrait-result" readonly placeholder="Calculé automatiquement">
+    <input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
 
     <p id="retrait-rate-info" style="color:#e67e22; font-weight:bold;"></p>
 
@@ -175,27 +174,19 @@
 <script>
   let retraitRate = 0;
 
-  function selectRetraitCrypto(imgElement, crypto, rate) {
-    document.querySelectorAll('#retrait-crypto-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
-    document.getElementById("retrait-crypto").value = crypto;
+  function selectRetraitCrypto(crypto, rate) {
+    document.getElementById("retrait-crypto-choice").value = crypto;
     retraitRate = rate;
     document.getElementById("retrait-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
     calculateAriaryRetrait();
   }
 
-  function selectRetraitMoney(imgElement, provider) {
-    document.querySelectorAll('#retrait-mobile-money-select img').forEach(img => img.classList.remove('selected'));
-    imgElement.classList.add('selected');
-    document.getElementById("retrait-mobile-money").value = provider;
-  }
-
   function calculateAriaryRetrait() {
-    const montantCrypto = parseFloat(document.getElementById("montant-retrait").value);
-    const ariaryField = document.getElementById("retrait-result");
+    const amountCrypto = parseFloat(document.getElementById("crypto-retrait").value);
+    const ariaryField = document.getElementById("ariary-retrait-result");
 
-    if (!isNaN(montantCrypto) && retraitRate > 0) {
-      ariaryField.value = (montantCrypto * retraitRate).toLocaleString() + " Ar";
+    if (!isNaN(amountCrypto) && retraitRate > 0) {
+      ariaryField.value = (amountCrypto * retraitRate).toLocaleString();
     } else {
       ariaryField.value = "";
     }
