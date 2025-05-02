@@ -128,33 +128,64 @@ t<!DOCTYPE html><html lang="fr">
     <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
     <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
-  <form action="http://formsubmit.co/takalocash@gmail.com@gmail.com" method="POST">
-    <label>Cryptomonnaie</label>
-    <div class="icon-select">
-      <img src="btc.png" alt="BTC">
-      <img src="eth.png" alt="ETH">
-      <img src="usdt.png" alt="USDT">
-      <img src="bnb.png" alt="BNB">
-    </div>
-    <label>Adresse crypto envoyée</label>
-    <input type="text" name="adresse_crypto">
-    <label>Montant (crypto)</label>
-    <input type="number" name="montant_crypto">
-    <label>Service Mobile Money (réception)</label>
-    <div class="icon-select">
-      <img src="MVOLA.png" alt="Mvola">
-      <img src="orange.png" alt="Orange Money">
-      <img src="airtel.png" alt="Airtel Money">
-    </div>
-    <label>Numéro de téléphone</label>
-    <input type="text" name="numero_telephone">
-    <label>Nom inscrit sur le numéro</label>
-    <input type="text" name="nom_utilisateur">
-    <label>Montant en Ariary (calcul automatique)</label>
-    <input type="text" readonly value="Calculé selon taux du jour">
-    <button type="submit">Envoyer</button>
-  </form>
-</div>
+<form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
+  <label>Cryptomonnaie</label>
+  <div class="icon-select">
+    <img src="btc.png" alt="BTC" onclick="selectCrypto('BTC', 100000)">
+    <img src="eth.png" alt="ETH" onclick="selectCrypto('ETH', 5000)">
+    <img src="usdt.png" alt="USDT" onclick="selectCrypto('USDT', 4500)">
+    <img src="bnb.png" alt="BNB" onclick="selectCrypto('BNB', 3000)">
+  </div>
+  <input type="hidden" name="crypto" id="crypto-choice">
+
+  <label>Adresse crypto envoyée</label>
+  <input type="text" name="adresse_crypto" required>
+
+  <label>Montant (crypto)</label>
+  <input type="number" name="montant_crypto" id="crypto-amount" required oninput="calculateAriary()">
+
+  <label>Service Mobile Money (réception)</label>
+  <div class="icon-select">
+    <img src="MVOLA.png" alt="Mvola">
+    <img src="orange.png" alt="Orange Money">
+    <img src="airtel.png" alt="Airtel Money">
+  </div>
+
+  <label>Numéro de téléphone</label>
+  <input type="text" name="numero_telephone" required>
+
+  <label>Nom inscrit sur le numéro</label>
+  <input type="text" name="nom_utilisateur" required>
+
+  <label>Montant en Ariary (calcul automatique)</label>
+  <input type="text" name="montant_ariary" id="ariary-amount" readonly placeholder="Calculé automatiquement">
+
+  <p id="rate-info" style="color:#e67e22; font-weight:bold;"></p>
+
+  <button type="submit">Envoyer</button>
+</form>
+
+<script>
+  let currentRate = 0;
+
+  function selectCrypto(crypto, rate) {
+    document.getElementById("crypto-choice").value = crypto;
+    currentRate = rate;
+    document.getElementById("rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
+    calculateAriary();
+  }
+
+  function calculateAriary() {
+    const cryptoAmount = parseFloat(document.getElementById("crypto-amount").value);
+    const ariaryField = document.getElementById("ariary-amount");
+
+    if (!isNaN(cryptoAmount) && currentRate > 0) {
+      ariaryField.value = (cryptoAmount * currentRate).toLocaleString();
+    } else {
+      ariaryField.value = "";
+    }
+  }
+</script>
 
 <div id="depot" class="form-section">
   <h3>Formulaire de Dépôt</h3>
