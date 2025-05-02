@@ -99,6 +99,19 @@
       height: 40px;
       cursor: pointer;
     }
+  .icon-select img {
+    width: 50px;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+  .icon-select img.selected {
+    border: 2px solid #44bd32;
+    box-shadow: 0 0 10px #44bd32;
+  }
   </style>
 </head>
 <body>
@@ -128,23 +141,8 @@
     <div class="container">
     <h2>Choisissez une opération :</h2>
     <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
-    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section">
-  <style>
-  .icon-select img {
-    width: 50px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-
-  .icon-select img.selected {
-    border: 2px solid #44bd32;
-    box-shadow: 0 0 10px #44bd32;
-  }
-</style>
-
+    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section"
+                                     
 <div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
@@ -216,22 +214,6 @@
     }
   }
 </script>
-
-<style>
-  .icon-select img {
-    width: 50px;
-    margin: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-
-  .icon-select img.selected {
-    border: 2px solid #44bd32;
-    box-shadow: 0 0 10px #44bd32;
-  }
-</style>
 
 <div id="depot" class="form-section">
   <h3>Formulaire de Dépôt</h3>
