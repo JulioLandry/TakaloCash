@@ -99,6 +99,20 @@
       height: 40px;
       cursor: pointer;
     }
+    .icon-select img {
+  width: 50px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.icon-select img.selected {
+  border-color: #27ae60;
+  box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
+  transform: scale(1.1);
+}
   </style>
 </head>
 <body>
@@ -234,7 +248,7 @@
 <script>
   let depotRate = 0;
 
-  function selectDepotCrypto(crypto, rate) {
+  function selectDepotCrypto(crypto, rate,el) {
     document.getElementById("depot-crypto-choice").value = crypto;
     depotRate = rate;
     document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
