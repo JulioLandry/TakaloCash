@@ -113,6 +113,29 @@
   box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
   transform: scale(1.1);
 }
+    input, label, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+    input, button {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #2ecc71;
+    }
+    p.rate-info {
+      color: #e67e22;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -144,99 +167,49 @@
     <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
     <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section"
                                      
-<body><!-- Formulaire Dépôt --><div id="depot" class="form-section">
-  <h3>Formulaire de Dépôt</h3>
-  <form action="https://formsubmit.co/takalocash@gmail.com" method="POST"><label>Service Mobile Money</label>
-<div class="icon-select" id="depot-mobile-group">
-  <img src="MVOLA.png" alt="Mvola">
-  <img src="orange.png" alt="Orange Money">
-  <img src="airtel.png" alt="Airtel Money">
-</div>
-
-<label>Numéro téléphone utilisé</label>
-<input type="text" name="numero_telephone" required>
-
-<label>Montant en Ariary</label>
-<input type="number" name="montant_ariary" id="ariary-depot" required oninput="calculateCryptoDepot()">
-
-<label>Crypto choisi</label>
-<div class="icon-select" id="depot-crypto-group">
-  <img src="btc.png" alt="BTC" onclick="selectDepotCrypto('BTC', 100000, this)">
-  <img src="eth.png" alt="ETH" onclick="selectDepotCrypto('ETH', 5000, this)">
-  <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto('USDT', 4500, this)">
-  <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto('BNB', 3000, this)">
-</div>
-<input type="hidden" name="crypto_choisi" id="depot-crypto-choice">
-
-<label>Adresse crypto de réception</label>
-<input type="text" name="adresse_crypto" required>
-
-<label>Montant crypto reçu (calcul automatique)</label>
-<input type="text" name="montant_crypto" id="crypto-depot-result" readonly placeholder="Calculé automatiquement">
-
-<p id="depot-rate-info" class="rate-info"></p>
-
-<button type="submit">Envoyer</button>
-
-  </form>
-</div><!-- Formulaire Retrait --><div id="retrait" class="form-section">
+<div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
-    <label>Cryptomonnaie</label>
-    <div class="icon-select" id="retrait-crypto-group">
-      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000, this)">
-      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000, this)">
-      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500, this)">
-      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000, this)">
+
+    <label>Cryptomonnaie envoyée</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000)">
     </div>
-    <input type="hidden" name="crypto_choisi" id="retrait-crypto-choice"><label>Adresse crypto envoyée</label>
-<input type="text" name="adresse_crypto" required>
+    <input type="hidden" name="crypto_envoyee" id="retrait-crypto-choice">
 
-<label>Montant (crypto)</label>
-<input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
+    <label>Adresse crypto envoyée</label>
+    <input type="text" name="adresse_crypto" required>
 
-<label>Service Mobile Money (réception)</label>
-<div class="icon-select" id="retrait-mobile-group">
-  <img src="MVOLA.png" alt="Mvola">
-  <img src="orange.png" alt="Orange Money">
-  <img src="airtel.png" alt="Airtel Money">
-</div>
+    <label>Montant envoyé (crypto)</label>
+    <input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
 
-<label>Numéro de téléphone</label>
-<input type="text" name="numero_telephone" required>
+    <label>Service Mobile Money (réception)</label>
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
+    </div>
 
-<label>Nom inscrit sur le numéro</label>
-<input type="text" name="nom_utilisateur" required>
+    <label>Numéro de téléphone</label>
+    <input type="text" name="numero_telephone" required>
 
-<label>Montant en Ariary (calcul automatique)</label>
-<input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
+    <label>Nom inscrit sur le numéro</label>
+    <input type="text" name="nom_utilisateur" required>
 
-<p id="retrait-rate-info" class="rate-info"></p>
+    <label>Montant en Ariary (calcul automatique)</label>
+    <input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
 
-<button type="submit">Envoyer</button>
+    <p id="retrait-rate-info" style="color:#e67e22; font-weight:bold;"></p>
 
+    <button type="submit">Envoyer</button>
   </form>
-</div><script>
-  let depotRate = 0;
-  function selectDepotCrypto(crypto, rate, el) {
-    depotRate = rate;
-    document.getElementById("depot-crypto-choice").value = crypto;
-    document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
-    setSelected("depot-crypto-group", el);
-    calculateCryptoDepot();
-  }
-
-  function calculateCryptoDepot() {
-    const amountAriary = parseFloat(document.getElementById("ariary-depot").value);
-    const cryptoField = document.getElementById("crypto-depot-result");
-    if (!isNaN(amountAriary) && depotRate > 0) {
-      cryptoField.value = (amountAriary / depotRate).toFixed(8);
-    } else {
-      cryptoField.value = "";
-    }
-  }
-
-  let retraitRate = 0;
+</div>
+      
+<script>    
+let retraitRate = 0;
   function selectRetraitCrypto(crypto, rate, el) {
     retraitRate = rate;
     document.getElementById("retrait-crypto-choice").value = crypto;
@@ -268,9 +241,68 @@
       setSelected(this.parentElement.id, this);
     });
   });
-</script></body>
+</script>
 
-  </div>  <footer>
+<div id="depot" class="form-section">
+  <h3>Formulaire de Dépôt</h3>
+  <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
+    
+    <label>Service Mobile Money</label>
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
+    </div>
+
+    <label>Numéro téléphone utilisé</label>
+    <input type="text" name="numero_telephone" required>
+
+    <label>Montant en Ariary</label>
+    <input type="number" name="montant_ariary" id="ariary-depot" required oninput="calculateCryptoDepot()">
+
+    <label>Crypto choisi</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectDepotCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectDepotCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto('BNB', 3000)">
+    </div>
+    <input type="hidden" name="crypto_choisi" id="depot-crypto-choice">
+
+    <label>Adresse crypto de réception</label>
+    <input type="text" name="adresse_crypto" required>
+
+    <label>Montant crypto reçu (calcul automatique)</label>
+    <input type="text" name="montant_crypto" id="crypto-depot-result" readonly placeholder="Calculé automatiquement">
+
+    <p id="depot-rate-info" style="color:#e67e22; font-weight:bold;"></p>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+<script>
+  let depotRate = 0;
+  function selectDepotCrypto(crypto, rate, el) {
+    depotRate = rate;
+    document.getElementById("depot-crypto-choice").value = crypto;
+    document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
+    setSelected("depot-crypto-group", el);
+    calculateCryptoDepot();
+  }
+
+  function calculateCryptoDepot() {
+    const amountAriary = parseFloat(document.getElementById("ariary-depot").value);
+    const cryptoField = document.getElementById("crypto-depot-result");
+    if (!isNaN(amountAriary) && depotRate > 0) {
+      cryptoField.value = (amountAriary / depotRate).toFixed(8);
+    } else {
+      cryptoField.value = "";
+    }
+  }
+</script>
+
+<footer>
     <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
     <div class="footer-links">
       <a onclick="showModal('privacy')">Politique de confidentialité</a> |
