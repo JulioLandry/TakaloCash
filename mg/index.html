@@ -207,27 +207,40 @@
     <button type="submit">Envoyer</button>
   </form>
 </div>
-
-<script>
-  let retraitRate = 0;
-
-  function selectRetraitCrypto(crypto, rate) {
-    document.getElementById("retrait-crypto-choice").value = crypto;
+      
+<script>    
+let retraitRate = 0;
+  function selectRetraitCrypto(crypto, rate, el) {
     retraitRate = rate;
+    document.getElementById("retrait-crypto-choice").value = crypto;
     document.getElementById("retrait-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
+    setSelected("retrait-crypto-group", el);
     calculateAriaryRetrait();
   }
 
   function calculateAriaryRetrait() {
     const amountCrypto = parseFloat(document.getElementById("crypto-retrait").value);
     const ariaryField = document.getElementById("ariary-retrait-result");
-
     if (!isNaN(amountCrypto) && retraitRate > 0) {
       ariaryField.value = (amountCrypto * retraitRate).toLocaleString();
     } else {
       ariaryField.value = "";
     }
   }
+
+  function setSelected(groupId, selectedImg) {
+    document.querySelectorAll(`#${groupId} img`).forEach(img => {
+      img.classList.remove("selected");
+    });
+    selectedImg.classList.add("selected");
+  }
+
+  // Add selection effect for Mobile Money icons
+  document.querySelectorAll("#depot-mobile-group img, #retrait-mobile-group img").forEach(img => {
+    img.addEventListener("click", function() {
+      setSelected(this.parentElement.id, this);
+    });
+  });
 </script>
 
 <div id="depot" class="form-section">
@@ -270,18 +283,17 @@
 
 <script>
   let depotRate = 0;
-
-  function selectDepotCrypto(crypto, rate,el) {
-    document.getElementById("depot-crypto-choice").value = crypto;
+  function selectDepotCrypto(crypto, rate, el) {
     depotRate = rate;
+    document.getElementById("depot-crypto-choice").value = crypto;
     document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
+    setSelected("depot-crypto-group", el);
     calculateCryptoDepot();
   }
 
   function calculateCryptoDepot() {
     const amountAriary = parseFloat(document.getElementById("ariary-depot").value);
     const cryptoField = document.getElementById("crypto-depot-result");
-
     if (!isNaN(amountAriary) && depotRate > 0) {
       cryptoField.value = (amountAriary / depotRate).toFixed(8);
     } else {
@@ -290,7 +302,7 @@
   }
 </script>
 
-  </div>  <footer>
+<footer>
     <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
     <div class="footer-links">
       <a onclick="showModal('privacy')">Politique de confidentialité</a> |
