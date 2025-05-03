@@ -1,182 +1,320 @@
 <!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Formulaires Dépôt & Retrait - TakaloCash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TakaloCash</title>
   <style>
+    nav {
+      background-color: #00b894;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .menu a {
+      color: yellow;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .menu a:hover {
+      text-decoration: underline;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background: url('Ariary.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 20px;
+    }
+    header, footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+    .container {
       padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background: white;
     }
-    .form-section {
-      background: #fff;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 10px;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .icon-select img {
-      width: 50px;
-      margin: 5px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    .icon-select img.selected {
-      border-color: #27ae60;
-      box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
-      transform: scale(1.1);
-    }
-    input, label, button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-    }
-    input, button {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    h1, h2 {
+      text-align: center;
     }
     button {
-      background: #27ae60;
-      color: white;
+      margin: 10px;
+      padding: 10px 20px;
       cursor: pointer;
-      font-weight: bold;
     }
-    button:hover {
-      background: #2ecc71;
+    .form-section {
+      display: none;
+      margin-top: 20px;
     }
-    p.rate-info {
-      color: #e67e22;
-      font-weight: bold;
+    label, input, select {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
     }
+    .footer-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+    }
+    #modal-content {
+      background: white;
+      padding: 20px;
+      margin: 5% auto;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 10px;
+      position: relative;
+    }
+    #modal-content h3 {
+      margin-top: 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .icon-select {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .icon-select img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+    .icon-select img {
+  width: 50px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.icon-select img.selected {
+  border-color: #27ae60;
+  box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
+  transform: scale(1.1);
+}
   </style>
 </head>
-<body><!-- Formulaire Dépôt --><div id="depot" class="form-section">
-  <h3>Formulaire de Dépôt</h3>
-  <form action="https://formsubmit.co/takalocash@gmail.com" method="POST"><label>Service Mobile Money</label>
-<div class="icon-select" id="depot-mobile-group">
-  <img src="MVOLA.png" alt="Mvola">
-  <img src="orange.png" alt="Orange Money">
-  <img src="airtel.png" alt="Airtel Money">
-</div>
-
-<label>Numéro téléphone utilisé</label>
-<input type="text" name="numero_telephone" required>
-
-<label>Montant en Ariary</label>
-<input type="number" name="montant_ariary" id="ariary-depot" required oninput="calculateCryptoDepot()">
-
-<label>Crypto choisi</label>
-<div class="icon-select" id="depot-crypto-group">
-  <img src="btc.png" alt="BTC" onclick="selectDepotCrypto('BTC', 100000, this)">
-  <img src="eth.png" alt="ETH" onclick="selectDepotCrypto('ETH', 5000, this)">
-  <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto('USDT', 4500, this)">
-  <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto('BNB', 3000, this)">
-</div>
-<input type="hidden" name="crypto_choisi" id="depot-crypto-choice">
-
-<label>Adresse crypto de réception</label>
-<input type="text" name="adresse_crypto" required>
-
-<label>Montant crypto reçu (calcul automatique)</label>
-<input type="text" name="montant_crypto" id="crypto-depot-result" readonly placeholder="Calculé automatiquement">
-
-<p id="depot-rate-info" class="rate-info"></p>
-
-<button type="submit">Envoyer</button>
-
-  </form>
-</div><!-- Formulaire Retrait --><div id="retrait" class="form-section">
+<body>
+  <div style="text-align: right; padding: 10px;">
+  <a href="../mg/index.html" title="Malagasy">
+    <img src="https://flagcdn.com/w40/mg.png" alt="Malagasy" width="30">
+  </a>
+  <a href="../fr/index.html" title="Français">
+    <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="30">
+  </a>
+  </div>
+  <header>
+  <h1>TakaloCash</h1>
+  <p><strong>Échangez vos cryptos en argent réel, facilement et rapidement!</strong></p>
+  <p>Simple. Rapide. Sécurisé.</p>  
+  </header>
+  
+    <nav>
+      <div class="menu">
+        <a href="index.html">Fandraisana</a>
+        <a href="Service.html">Serivisy</a>
+        <a href="contact.html">Fifandraisana</a>
+        <a href="Faq.html">Fanontaniana</a>
+      </div>
+    </nav>
+  
+    <div class="container">
+    <h2>Choisissez une opération :</h2>
+    <button onclick="showForm('retrait')">Retrait (Crypto → Ariary)</button>
+    <button onclick="showForm('depot')">Dépôt (Ariary → Crypto)</button><div id="retrait" class="form-section"
+                                     
+<div id="retrait" class="form-section">
   <h3>Formulaire de Retrait</h3>
   <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
-    <label>Cryptomonnaie</label>
-    <div class="icon-select" id="retrait-crypto-group">
-      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000, this)">
-      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000, this)">
-      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500, this)">
-      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000, this)">
+
+    <label>Cryptomonnaie envoyée</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectRetraitCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectRetraitCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectRetraitCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectRetraitCrypto('BNB', 3000)">
     </div>
-    <input type="hidden" name="crypto_choisi" id="retrait-crypto-choice"><label>Adresse crypto envoyée</label>
-<input type="text" name="adresse_crypto" required>
+    <input type="hidden" name="crypto_envoyee" id="retrait-crypto-choice">
 
-<label>Montant (crypto)</label>
-<input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
+    <label>Adresse crypto envoyée</label>
+    <input type="text" name="adresse_crypto" required>
 
-<label>Service Mobile Money (réception)</label>
-<div class="icon-select" id="retrait-mobile-group">
-  <img src="MVOLA.png" alt="Mvola">
-  <img src="orange.png" alt="Orange Money">
-  <img src="airtel.png" alt="Airtel Money">
+    <label>Montant envoyé (crypto)</label>
+    <input type="number" name="montant_crypto" id="crypto-retrait" required oninput="calculateAriaryRetrait()">
+
+    <label>Service Mobile Money (réception)</label>
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
+    </div>
+
+    <label>Numéro de téléphone</label>
+    <input type="text" name="numero_telephone" required>
+
+    <label>Nom inscrit sur le numéro</label>
+    <input type="text" name="nom_utilisateur" required>
+
+    <label>Montant en Ariary (calcul automatique)</label>
+    <input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
+
+    <p id="retrait-rate-info" style="color:#e67e22; font-weight:bold;"></p>
+
+    <button type="submit">Envoyer</button>
+  </form>
 </div>
 
-<label>Numéro de téléphone</label>
-<input type="text" name="numero_telephone" required>
-
-<label>Nom inscrit sur le numéro</label>
-<input type="text" name="nom_utilisateur" required>
-
-<label>Montant en Ariary (calcul automatique)</label>
-<input type="text" name="montant_ariary" id="ariary-retrait-result" readonly placeholder="Calculé automatiquement">
-
-<p id="retrait-rate-info" class="rate-info"></p>
-
-<button type="submit">Envoyer</button>
-
-  </form>
-</div><script>
-  let depotRate = 0;
-  function selectDepotCrypto(crypto, rate, el) {
-    depotRate = rate;
-    document.getElementById("depot-crypto-choice").value = crypto;
-    document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
-    setSelected("depot-crypto-group", el);
-    calculateCryptoDepot();
-  }
-
-  function calculateCryptoDepot() {
-    const amountAriary = parseFloat(document.getElementById("ariary-depot").value);
-    const cryptoField = document.getElementById("crypto-depot-result");
-    if (!isNaN(amountAriary) && depotRate > 0) {
-      cryptoField.value = (amountAriary / depotRate).toFixed(8);
-    } else {
-      cryptoField.value = "";
-    }
-  }
-
+<script>
   let retraitRate = 0;
-  function selectRetraitCrypto(crypto, rate, el) {
-    retraitRate = rate;
+
+  function selectRetraitCrypto(crypto, rate) {
     document.getElementById("retrait-crypto-choice").value = crypto;
+    retraitRate = rate;
     document.getElementById("retrait-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
-    setSelected("retrait-crypto-group", el);
     calculateAriaryRetrait();
   }
 
   function calculateAriaryRetrait() {
     const amountCrypto = parseFloat(document.getElementById("crypto-retrait").value);
     const ariaryField = document.getElementById("ariary-retrait-result");
+
     if (!isNaN(amountCrypto) && retraitRate > 0) {
       ariaryField.value = (amountCrypto * retraitRate).toLocaleString();
     } else {
       ariaryField.value = "";
     }
   }
+</script>
 
-  function setSelected(groupId, selectedImg) {
-    document.querySelectorAll(`#${groupId} img`).forEach(img => {
-      img.classList.remove("selected");
-    });
-    selectedImg.classList.add("selected");
+<div id="depot" class="form-section">
+  <h3>Formulaire de Dépôt</h3>
+  <form action="https://formsubmit.co/takalocash@gmail.com" method="POST">
+    
+    <label>Service Mobile Money</label>
+    <div class="icon-select">
+      <img src="MVOLA.png" alt="Mvola">
+      <img src="orange.png" alt="Orange Money">
+      <img src="airtel.png" alt="Airtel Money">
+    </div>
+
+    <label>Numéro téléphone utilisé</label>
+    <input type="text" name="numero_telephone" required>
+
+    <label>Montant en Ariary</label>
+    <input type="number" name="montant_ariary" id="ariary-depot" required oninput="calculateCryptoDepot()">
+
+    <label>Crypto choisi</label>
+    <div class="icon-select">
+      <img src="btc.png" alt="BTC" onclick="selectDepotCrypto('BTC', 100000)">
+      <img src="eth.png" alt="ETH" onclick="selectDepotCrypto('ETH', 5000)">
+      <img src="usdt.png" alt="USDT" onclick="selectDepotCrypto('USDT', 4500)">
+      <img src="bnb.png" alt="BNB" onclick="selectDepotCrypto('BNB', 3000)">
+    </div>
+    <input type="hidden" name="crypto_choisi" id="depot-crypto-choice">
+
+    <label>Adresse crypto de réception</label>
+    <input type="text" name="adresse_crypto" required>
+
+    <label>Montant crypto reçu (calcul automatique)</label>
+    <input type="text" name="montant_crypto" id="crypto-depot-result" readonly placeholder="Calculé automatiquement">
+
+    <p id="depot-rate-info" style="color:#e67e22; font-weight:bold;"></p>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+<script>
+  let depotRate = 0;
+
+  function selectDepotCrypto(crypto, rate,el) {
+    document.getElementById("depot-crypto-choice").value = crypto;
+    depotRate = rate;
+    document.getElementById("depot-rate-info").textContent = `1 ${crypto} = ${rate.toLocaleString()} Ar`;
+    calculateCryptoDepot();
   }
 
-  // Add selection effect for Mobile Money icons
-  document.querySelectorAll("#depot-mobile-group img, #retrait-mobile-group img").forEach(img => {
-    img.addEventListener("click", function() {
-      setSelected(this.parentElement.id, this);
-    });
-  });
-</script></body>
+  function calculateCryptoDepot() {
+    const amountAriary = parseFloat(document.getElementById("ariary-depot").value);
+    const cryptoField = document.getElementById("crypto-depot-result");
+
+    if (!isNaN(amountAriary) && depotRate > 0) {
+      cryptoField.value = (amountAriary / depotRate).toFixed(8);
+    } else {
+      cryptoField.value = "";
+    }
+  }
+</script>
+
+  </div>  <footer>
+    <p>Contact : takalocash@gmail.com | WhatsApp: +261 34 74 510 51</p>
+    <div class="footer-links">
+      <a onclick="showModal('privacy')">Politique de confidentialité</a> |
+      <a onclick="showModal('terms')">Conditions générales d'utilisation</a>
+    </div>
+    <p>Adresse : Antananarivo, Madagascar - TakaloCash © 2025</p>
+  </footer>  <div id="modal">
+    <div id="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>  <script>
+    function showForm(type) {
+      document.getElementById('retrait').style.display = 'none';
+      document.getElementById('depot').style.display = 'none';
+      document.getElementById(type).style.display = 'block';
+    }
+
+    function showModal(type) {
+      document.getElementById('modal').style.display = 'block';
+      let content = document.getElementById('modal-body');
+      if (type === 'privacy') {
+        content.innerHTML = `
+          <h3>Politique de confidentialité</h3>
+          <p>Chez TakaloCash, la confidentialité de vos données est notre priorité.</p>
+          <p><strong>1. Données collectées :</strong> Nous collectons uniquement les informations nécessaires : nom, email, téléphone, type de crypto, montants.</p>
+          <p><strong>2. Utilisation :</strong> Pour traiter les opérations, contact client, amélioration du service.</p>
+          <p><strong>3. Partage :</strong> Aucune donnée ne sera partagée sauf obligation légale.</p>
+          <p><strong>4. Sécurité :</strong> Protection technique des données.</p>
+          <p><strong>5. Vos droits :</strong> Vous pouvez demander modification ou suppression par email ou WhatsApp.</p>
+        `;
+      } else if (type === 'terms') {
+        content.innerHTML = `
+          <h3>Conditions générales d'utilisation</h3>
+          <p><strong>1. Service :</strong> Plateforme d'échange crypto ↔ Ariary via services mobiles.</p>
+          <p><strong>2. Âge requis :</strong> 18 ans minimum.</p>
+          <p><strong>3. Délais :</strong> Transactions sous 5 à 60 minutes.</p>
+          <p><strong>4. Taux :</strong> Variables et affichés au moment de la validation.</p>
+          <p><strong>5. Responsabilité :</strong> Non responsable des erreurs de saisie ou problèmes de réseau.</p>
+          <p><strong>6. Suspension :</strong> Droit de bloquer tout usage frauduleux.</p>
+          <p><strong>7. Modification :</strong> Ces conditions peuvent être modifiées à tout moment.</p>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script></body>
 </html>
