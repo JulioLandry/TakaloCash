@@ -1,32 +1,63 @@
 <!DOCTYPE html>
-<html lang="mg">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Fisaorana</title>
+  <title>Confirmation - TakaloCash</title>
+  <meta http-equiv="refresh" content="10; url=index.html">
   <style>
     body {
-      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
       text-align: center;
-      padding-top: 100px;
-      font-family: sans-serif;
+      padding: 50px;
     }
-    .message {
-      background: #fff;
-      display: inline-block;
+
+    .container {
+      background: #dff0d8;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border: 2px solid #27ae60;
+      color: #2c3e50;
+      font-weight: bold;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #27ae60;
+
+    .logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #27ae60;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #2ecc71;
+    }
+
+    .info {
+      margin-top: 15px;
+      color: #888;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="message">
+  <div class="container">
+    <img src="takalocash-logo.png" alt="TakaloCash Logo" class="logo">
     <h2>Misaotra!</h2>
-    <p>Voaray soa aman-tsara ny fangatahanao. Hifandray izahay tsy ho ela.</p>
-    <a href="index.html">Miverina amin'ny pejy fandraisana</a>
+    <p>Ny fangatahanao dia nalefa soa aman-tsara.</p>
+    <a href="index.html" class="btn">Miverina amin'ny pejy fandraisana</a>
+    <p class="info">Ho averina ho azy ao anatin'ny 10 segondra...</p>
   </div>
 </body>
 </html>
