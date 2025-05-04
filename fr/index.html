@@ -4,199 +4,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TakaloCash</title>
   <style>
-    /*General Layout*/
-nav {
-  background-color: #34495e;
-  padding: 10px;
-  text-align: center;
-}
+  nav {
+    background-color: #34495e;
+    padding: 10px;
+    text-align: center;
+  }
 
-.menu a {
-  color: yellow;
-  margin: 0px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 25px;
-}
-
-.menu a:hover {
-  text-decoration: underline;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: url('crypto.png') no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 10px;
-}
-
-header, footer {
-  background: #1abc9c;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-
-.container {
-  padding: 10px;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  box-sizing: border-box;
-}
-
-h1, h2 {
-  text-align: center;
-}
-
-button {
-  margin: 0px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.form-section {
-  display: none;
-  margin-top: 20px;
-}
-
-label, input, select {
-  display: block;
-  width: 100%;
-  margin-bottom: 0px;
-}
-
-.footer-links a {
-  color: white;
-  margin: 0px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-}
-
-#modal-content {
-  background: url('crypto.png') no-repeat center center fixed;
-  background-size: cover;
-  padding: 10px;
-  margin: 0px;
-  width: 90%;
-  max-width: 700px;
-  border-radius: 10px;
-  position: relative;
-}
-
-#modal-content h3 {
-  margin-top: 0;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.icon-select {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-
-.icon-select img {
-  width: 50px;
-  margin: 0px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.icon-select img.selected {
-  border-color: #27ae60;
-  box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
-  transform: scale(1.1);
-}
-
-input, label, button {
-  display: block;
-  width: 100%;
-  margin: 0px 0;
-}
-
-input, button {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: #27ae60;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #2ecc71;
-}
-
-p.rate-info {
-  color: #e67e22;
-  font-weight: bold;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
   .menu a {
-    display: block;
-    font-size: 20px;
-    margin: 5px 0;
+    color: yellow;
+    margin: 0px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 25px;
   }
 
-  .icon-select {
-    flex-wrap: wrap;
-    justify-content: center;
+  .menu a:hover {
+    text-decoration: underline;
   }
 
-  .icon-select img {
-    width: 40px;
-  }
-
-  button {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
   body {
-    padding: 5px;
+    font-family: Arial, sans-serif;
+    background: url('crypto.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
   }
 
-  header, footer, .container {
-    padding: 8px;
+  header, footer {
+    background: #1abc9c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 10px;
   }
 
   h1, h2 {
-    font-size: 22px;
+    text-align: center;
   }
 
-  .menu a {
+  button {
+    margin: 0px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .form-section {
+    display: none;
+    margin-top: 20px;
+  }
+
+  label, input, select {
+    display: block;
+    width: 100%;
+    margin-bottom: 0px;
+  }
+
+  .footer-links a {
+    color: white;
+    margin: 0px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+  }
+
+  #modal-content {
+    background: url('crypto.png') no-repeat center center fixed;
+    background-size: cover;
+    padding: 10px;
+    margin: 0px auto;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  #modal-content h3 {
+    margin-top: 0;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
     font-size: 18px;
   }
+
+  .icon-select {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .icon-select img {
+    width: 50px;
+    margin: 0px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+  .icon-select img.selected {
+    border-color: #27ae60;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
+    transform: scale(1.1);
+  }
+
+  input, label, button {
+    display: block;
+    width: 100%;
+    margin: 0px 0;
+  }
+
+  input, button {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    background: #27ae60;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background: #2ecc71;
+  }
+
+  p.rate-info {
+    color: #e67e22;
+    font-weight: bold;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .menu a {
+      display: block;
+      font-size: 20px;
+      margin: 10px 0;
     }
+
+    .container {
+      padding: 10px;
+      margin: 0 10px;
+    }
+
+    .icon-select {
+      justify-content: center;
+    }
+  }
   </style>
 </head>
 <body>
