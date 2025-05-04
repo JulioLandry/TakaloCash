@@ -387,5 +387,42 @@ let retraitRate = 0;
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
     }
+  </script><script>
+    function showForm(type) {
+      document.getElementById('retrait').style.display = 'none';
+      document.getElementById('depot').style.display = 'none';
+      document.getElementById(type).style.display = 'block';
+    }
+
+    function showModal(type) {
+      document.getElementById('modal').style.display = 'block';
+      let content = document.getElementById('modal-body');
+      if (type === 'privacy') {
+        content.innerHTML = `
+          <h3>Politique de confidentialité</h3>
+          <p>Chez TakaloCash, la confidentialité de vos données est notre priorité.</p>
+          <p><strong>1. Données collectées :</strong> Nous collectons uniquement les informations nécessaires : nom, email, téléphone, type de crypto, montants.</p>
+          <p><strong>2. Utilisation :</strong> Pour traiter les opérations, contact client, amélioration du service.</p>
+          <p><strong>3. Partage :</strong> Aucune donnée ne sera partagée sauf obligation légale.</p>
+          <p><strong>4. Sécurité :</strong> Protection technique des données.</p>
+          <p><strong>5. Vos droits :</strong> Vous pouvez demander modification ou suppression par email ou WhatsApp.</p>
+        `;
+      } else if (type === 'terms') {
+        content.innerHTML = `
+          <h3>Conditions générales d'utilisation</h3>
+          <p><strong>1. Service :</strong> Plateforme d'échange crypto ↔ Ariary via services mobiles.</p>
+          <p><strong>2. Âge requis :</strong> 18 ans minimum.</p>
+          <p><strong>3. Délais :</strong> Transactions sous 5 à 60 minutes.</p>
+          <p><strong>4. Taux :</strong> Variables et affichés au moment de la validation.</p>
+          <p><strong>5. Responsabilité :</strong> Non responsable des erreurs de saisie ou problèmes de réseau.</p>
+          <p><strong>6. Suspension :</strong> Droit de bloquer tout usage frauduleux.</p>
+          <p><strong>7. Modification :</strong> Ces conditions peuvent être modifiées à tout moment.</p>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
   </script></body>
 </html>
